@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Mouse & Keyboard</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff758c, #ff7eb3, #ff758c);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            animation: bgAnimation 10s infinite alternate;
+        }
+
+        @keyframes bgAnimation {
+            from { background: linear-gradient(135deg, #ff758c, #ff7eb3, #ff758c); }
+            to { background: linear-gradient(135deg, #8e44ad, #6c5ce7, #ff758c); }
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-weight: 500;
+            margin-left: 20px;
+        }
+
+        .header {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .header p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .btn {
+            margin: 10px;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+        }
+
+        .features-section {
+            padding: 100px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            margin: 50px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .feature-link {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .feature-link:hover {
+            color: #6c5ce7;
+        }
+
+        .feature-link i {
+            margin-left: 10px;
+            transition: margin-left 0.3s ease-in-out;
+        }
+
+        .feature-link:hover i {
+            margin-left: 15px;
+        }
+
+        .about-section {
+            padding: 100px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            margin: 50px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-image img {
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.05);
+        }
+
+        .about-content {
+            padding: 20px;
+        }
+
+        .about-content h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .about-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .about-features li {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+
+        .about-features i {
+            color: #6c5ce7;
+            margin-right: 10px;
+        }
+
+        .btn-outline-light {
+            border: 2px solid white;
+            color: white;
+            padding: 10px 30px;
+            font-size: 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-outline-light:hover {
+            background: white;
+            color: #6c5ce7;
+            transform: scale(1.05);
+        }
+
+        .contact-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 80px 0;
+            border-radius: 15px;
+            margin: 50px 0;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-info {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-item {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .info-item i {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .info-item i:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .info-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .info-item p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+            color: #ff7eb3;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-form .form-control {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .contact-form .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .contact-form .form-control:focus {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .contact-form .btn-primary {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2rem;
+            border-radius: 10px;
+            background: #6c5ce7;
+            border: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .contact-form .btn-primary:hover {
+            background: #8e44ad;
+            transform: scale(1.05);
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-top: 2px solid rgba(255, 255, 255, 0.3);
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Virtual Controls</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" href="#profile">Profile</a>-->
+<!--                    </li>-->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+<header class="header" id="home">
+    <div class="container">
+        <h1>Virtual Mouse & Keyboard</h1>
+        <p>Control your system using hand gestures with AI-powered technology.</p>
+        <button id="startMouse" class="btn btn-primary"><i class="fas fa-mouse"></i> Start Virtual Mouse</button>
+        <button id="startKeyboard" class="btn btn-success"><i class="fas fa-keyboard"></i> Start Virtual Keyboard</button>
+        <button id="start_rps" class="btn btn-info"><i class="fas fa-hand-rock"></i> Start Rock Paper Scissors</button>
+        <button id="stopAll" class="btn btn-danger"><i class="fas fa-stop"></i> Stop All</button>
+
+        <p id="status" style="margin-top: 20px; font-size: 1.2rem;"></p>
+    </div>
+</header>
+
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <h2 class="text-center mb-5">Features</h2>
+            <p class="text-center mb-5">Explore the powerful features of Virtual Controls.</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-hand-pointer"></i>
+                        <h3>Gesture Control</h3>
+                        <p>Navigate your system with just hand movements.</p>
+                        <a href="#" class="feature-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-mouse"></i>
+                        <h3>Virtual Mouse</h3>
+                        <p>Perform clicks, scroll, and drag actions with ease.</p>
+                        <a href="#" class="feature-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-keyboard"></i>
+                        <h3>Virtual Keyboard</h3>
+                        <p>Type effortlessly without a physical keyboard.</p>
+                        <a href="#" class="feature-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2 class="text-center mb-5">About Virtual Controls</h2>
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="about-image">
+                        <video controls class="img-fluid">
+                            <source src="your-video-file.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="about-content">
+                        <h3>Hand Gesture Based Virtual Application</h3>
+                        <p>
+                            Hand Gesture Based Virtual Application enables users to interact with their computer using simple hand movements.
+                            This technology provides a seamless and intuitive way to control your system without the need for physical devices.
+                            Whether you're navigating, selecting options, or scrolling, it offers a hands-free and efficient experience.
+                        </p>
+
+                        <ul class="about-features">
+                            <li><i class="fas fa-check-circle"></i> Gesture-based navigation</li>
+                            <li><i class="fas fa-check-circle"></i> Hand Gesture Based</li>
+                            <li><i class="fas fa-check-circle"></i> No physical devices required</li>
+                            <li><i class="fas fa-check-circle"></i> Easy to set up and use</li>
+                        </ul>
+                        <button class="btn btn-outline-light">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="text-center mb-5">Contact Us</h2>
+            <p class="text-center mb-5">Have questions or feedback? Reach out to us! We'd love to hear from you.</p>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="contact-info">
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h3>Address</h3>
+                            <p>420, Koramangala, Bangalore - 560034</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <h3>Phone</h3>
+                            <p>+91 79913 55551</p>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <h3>Email</h3>
+                            <p>saumyadwivedi@gmail.com</p>
+                        </div>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="contact-form">
+                        <form>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Your Email" required>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Subject" required>
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Made with ❤️ by Saumya Dwivedi | Ha Virtual Controls</p>
+    </footer>
+
+    <script>
+        function sendRequest(url, successMessage) {
+            $.get(url, function(data) {
+                $("#status").text(successMessage + ": " + data.status);
+            });
+        }
+
+        $("#startMouse").click(function() {
+            sendRequest("/start_mouse", "Mouse");
+        });
+
+        $("#startKeyboard").click(function() {
+            sendRequest("/start_keyboard", "Keyboard");
+        });
+
+        $("#start_rps").click(function() {
+        sendRequest("/start_rps", "Rock Paper Scissors");
+        });
+
+        $("#stopAll").click(function() {
+            sendRequest("/stop_processes", "All Processes");
+        });
+    </script>
+</body>
+</html>
